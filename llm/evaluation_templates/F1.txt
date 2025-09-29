@@ -1,0 +1,33 @@
+You are a security expert. Based on the provided security rule, determine whether the following code violates the rule.
+Important constraints:
+- Do not assume that the code must contain a misuse. It may or may not.
+- Only consider misuses within the given rule. Do not invent new types of misuses outside the rule.
+
+<rule>
+{RULE}
+</rule>
+
+<code>
+{CODE}
+</code>
+
+If applicable, specify which rule(s) (by ID and category) were violated.  
+Respond strictly in the following JSON format:
+
+```json
+{{
+  "misuses": [
+    {{
+      "id": <rule_id>,
+      "category": "<rule_category>",
+      "location": "<code location>",
+      "description": "<detailed description>",
+      "severity": "<High/Medium/Low>"
+    }}
+  ],
+  "recommendations": [
+    "<recommendation 1>",
+    "<recommendation 2>"
+  ],
+  "analysis_summary": "<summary>"
+}}

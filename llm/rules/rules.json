@@ -1,0 +1,135 @@
+[
+    {
+        "id": 1,
+        "category": "Symmetric Cipher Security",
+        "threat": "Use of weak or deprecated symmetric algorithms",
+        "checkpoints": [
+            "Use AES or ChaCha20",
+            "Avoid DES or RC4"
+        ],
+        "misuse_example": "DES.new(key) / RC4.new()",
+        "safe_example": "AES.new(key, AES.MODE_GCM)",
+        "severity": "High"
+    },
+    {
+        "id": 2,
+        "category": "Asymmetric Cipher Security",
+        "threat": "Use of short key length in RSA or ECC",
+        "checkpoints": [
+            "Use RSA ≥ 2048 bits",
+            "Use ECC ≥ 256 bits"
+        ],
+        "misuse_example": "rsa.generate_private_key(1024)",
+        "safe_example": "rsa.generate_private_key(2048)",
+        "severity": "High"
+    },
+    {
+        "id": 3,
+        "category": "Cryptographic Hash Security",
+        "threat": "Use of insecure hash functions like MD5 or SHA-1",
+        "checkpoints": [
+            "Avoid MD5 and SHA-1 in security-critical code",
+            "Use SHA-256 or higher (e.g., SHA-3)"
+        ],
+        "misuse_example": "hashlib.md5() / SHA1.new()",
+        "safe_example": "hashlib.sha256() / SHA3_256.new()",
+        "severity": "High"
+    },
+    {
+        "id": 4,
+        "category": "Mode of Operation",
+        "threat": "Use of insecure block cipher modes like ECB",
+        "checkpoints": [
+            "Avoid ECB mode due to pattern leakage",
+            "Use secure modes like CBC with random IVs or GCM"
+        ],
+        "misuse_example": "AES.new(key, AES.MODE_ECB)",
+        "safe_example": "AES.new(key, AES.MODE_GCM)",
+        "severity": "High"
+    },
+    {
+        "id": 5,
+        "category": "Key Management",
+        "threat": "Hardcoded or statically defined cryptographic keys",
+        "checkpoints": [
+            "Never hardcode cryptographic keys in source code",
+            "Use secure key generation with os.urandom or key management systems"
+        ],
+        "misuse_example": "key = b\"myhardcodedkey\"",
+        "safe_example": "key = os.urandom(32)",
+        "severity": "High"
+    },
+    {
+        "id": 6,
+        "category": "PRNG Quality",
+        "threat": "Use of non-cryptographically secure random generators",
+        "checkpoints": [
+            "Avoid random.random() or random.randint() for security purposes",
+            "Use secrets.token_bytes() or os.urandom() instead"
+        ],
+        "misuse_example": "random.random() / random.randint()",
+        "safe_example": "secrets.token_bytes() / os.urandom()",
+        "severity": "High"
+    },
+    {
+        "id": 7,
+        "category": "Seed Management",
+        "threat": "Predictable random seeds used for sensitive operations",
+        "checkpoints": [
+            "Avoid seeding PRNG with predictable sources like time.time()",
+            "Use os.urandom() to generate unpredictable seeds"
+        ],
+        "misuse_example": "random.seed(time.time())",
+        "safe_example": "random.seed(os.urandom(16))",
+        "severity": "Medium"
+    },
+    {
+        "id": 8,
+        "category": "IV Management",
+        "threat": "Reuse or static initialization of IVs",
+        "checkpoints": [
+            "Ensure IV is randomly generated for every encryption",
+            "Avoid fixed or reused IVs with the same key"
+        ],
+        "misuse_example": "iv = b'0000000000000000'",
+        "safe_example": "iv = os.urandom(16)",
+        "severity": "High"
+    },
+    {
+        "id": 9,
+        "category": "Salt Management",
+        "threat": "Use of static salt values in password hashing or KDF",
+        "checkpoints": [
+            "Avoid hardcoded or fixed salt values",
+            "Generate new random salt using os.urandom for each operation"
+        ],
+        "misuse_example": "salt = b'salt1234'",
+        "safe_example": "salt = os.urandom(16)",
+        "severity": "High"
+    },
+    {
+        "id": 10,
+        "category": "PBE Iteration Count",
+        "threat": "Use of insufficient number of iterations in key derivation",
+        "checkpoints": [
+            "Use iteration count ≥ 100,000 as minimal baseline",
+            "OWASP 2023 recommends 600,000 for SHA-256-based PBKDF2",
+            "Avoid iteration count < 100,000"
+        ],
+        "misuse_example": "iterations=1000",
+        "safe_example": "iterations=600000",
+        "severity": "High"
+    },
+    {
+        "id": 11,
+        "category": "Secure Configuration Mode",
+        "threat": "Missing authentication in stream cipher configuration",
+        "checkpoints": [
+            "Avoid using stream ciphers without authentication (e.g., ChaCha20 without MAC)",
+            "Use authenticated cipher modes like AES-GCM or ChaCha20-Poly1305"
+        ],
+        "misuse_example": "ChaCha20.new()",
+        "safe_example": "ChaCha20_Poly1305.new()",
+        "severity": "Medium"
+    }
+]

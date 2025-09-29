@@ -1,0 +1,41 @@
+You are a security analyst. Evaluate the cryptographic API usage in the following code based on the rule and inter-procedural dependency.
+Important constraints:
+- Do not assume that the code must contain a misuse. It may or may not.
+- Only consider misuses within the given rule. Do not invent new types of misuses outside the rule.
+
+<rule>
+{RULE}
+</rule>
+
+<code>
+{CODE}
+</code>
+
+<dependency>
+{MERGED_DEPENDENCY_JSON}
+</dependency>
+
+<call_chain>
+{CALL_CHAIN}
+</call_chain>
+
+If applicable, specify which rule(s) (by ID and category) were violated.  
+Respond strictly in the following JSON format:
+
+```json
+{{
+  "misuses": [
+    {{
+      "id": <rule_id>,
+      "category": "<rule_category>",
+      "location": "<code location>",
+      "description": "<detailed description>",
+      "severity": "<High/Medium/Low>"
+    }}
+  ],
+  "recommendations": [
+    "<recommendation 1>",
+    "<recommendation 2>"
+  ],
+  "analysis_summary": "<summary>"
+}}

@@ -1,0 +1,26 @@
+You are a security expert. Read the following Python code and determine if there is any cryptographic API misuse.
+Important constraints:
+- Do not assume that the code must contain a misuse. It may or may not.
+
+<code>
+{CODE}
+</code>
+
+Please explain your reasoning and whether this code is secure or contains a misuse.
+Respond strictly in the following JSON format only:
+```json
+{{
+  "misuses": [
+    {{
+      "type": "<misuse type>",
+      "location": "<code location>",
+      "description": "<detailed description>",
+      "severity": "<High/Medium/Low>"
+    }}
+  ],
+  "recommendations": [
+    "<recommendation 1>",
+    "<recommendation 2>"
+  ],
+  "analysis_summary": "<summary>"
+}}
